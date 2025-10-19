@@ -1,5 +1,6 @@
 // Load customers from localStorage
 let customers = JSON.parse(localStorage.getItem("barbershopCustomers")) || [];
+let searchQuery = "";
 
 // Save to localStorage
 function saveCustomers() {
@@ -60,12 +61,43 @@ function deleteCustomer(id) {
   }
 }
 
+// Search customers
+function searchCustomers(query) {
+  searchQuery = query.toLowerCase().trim();
+  renderCustomers();
+}
+
+// Filter customers based on search query
+function getFilteredCustomers() {
+  if (!searchQuery) {
+    return customers;
+  }
+
+  return customers.filter((customer) => {
+    const nameMatch = customer.name.toLowerCase().includes(searchQuery);
+    const phoneMatch = customer.phone && customer.phone.includes(searchQuery);
+    return nameMatch || phoneMatch;
+  });
+}
+
 // Render customers list
 function renderCustomers() {
   const container = document.getElementById("customersList");
+  const filteredCustomers = getFilteredCustomers();
 
-  if (customers.length === 0) {
-    container.innerHTML = `
+  if (filteredCustomers.length === 0) {
+    if (searchQuery) {
+      container.innerHTML = `
+                <div class="empty-state">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <h3>لا توجد نتائج</h3>
+                    <p>لم يتم العثور على زبائن مطابقين لبحثك</p>
+                </div>
+            `;
+    } else {
+      container.innerHTML = `
                 <div class="empty-state">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -74,10 +106,11 @@ function renderCustomers() {
                     <p>ابدأ بإضافة زبون جديد من الأعلى</p>
                 </div>
             `;
+    }
     return;
   }
 
-  container.innerHTML = customers
+  container.innerHTML = filteredCustomers
     .map((customer) => {
       const isFreeVisit = customer.visits === 8;
 
@@ -147,6 +180,13 @@ function setupEventListeners() {
     .getElementById("customerPhone")
     .addEventListener("keypress", function (e) {
       if (e.key === "Enter") addCustomer();
+    });
+
+  // Search functionality
+  document
+    .getElementById("searchInput")
+    .addEventListener("input", function (e) {
+      searchCustomers(e.target.value);
     });
 }
 
