@@ -1,0 +1,446 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Cairo",
+    sans-serif;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+  min-height: 100vh;
+  padding: clamp(15px, 3vw, 30px);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Added animated background gradient */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(212, 175, 55, 0.03) 0%,
+    transparent 50%
+  );
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Redesigned header with glassmorphism and animation */
+.header {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: clamp(30px, 5vw, 50px);
+  border-radius: 24px;
+  margin-bottom: clamp(20px, 4vw, 40px);
+  text-align: center;
+  animation: fadeInDown 0.8s ease-out;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header h1 {
+  background: linear-gradient(135deg, #d4af37 0%, #f4e5a1 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: clamp(2em, 6vw, 3.5em);
+  font-weight: 800;
+  margin-bottom: 15px;
+  letter-spacing: -1px;
+}
+
+.header p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: clamp(1em, 3vw, 1.3em);
+  font-weight: 300;
+}
+
+/* Image styles for professional look */
+.header img {
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
+  border-radius: 16px;
+  margin-top: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+  object-fit: cover;
+  object-position: center;
+}
+
+.header img:hover {
+  transform: scale(1.02);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2);
+}
+
+/* Responsive image styles */
+@media (max-width: 768px) {
+  .header img {
+    max-height: 150px;
+    margin-top: 15px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header img {
+    max-height: 120px;
+    margin-top: 10px;
+    border-radius: 8px;
+  }
+}
+
+/* Redesigned add customer section with glassmorphism */
+.add-customer {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: clamp(25px, 4vw, 40px);
+  border-radius: 24px;
+  margin-bottom: clamp(20px, 4vw, 40px);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.add-customer h2 {
+  color: #d4af37;
+  margin-bottom: 20px;
+  font-size: clamp(1.3em, 4vw, 1.8em);
+  font-weight: 700;
+}
+
+.input-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Redesigned inputs with modern styling */
+input[type="text"],
+input[type="tel"] {
+  flex: 1;
+  min-width: 200px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
+  font-size: 16px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]::placeholder,
+input[type="tel"]::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 600px) {
+  input[type="text"],
+  input[type="tel"] {
+    min-width: 100%;
+    font-size: 16px;
+  }
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus {
+  outline: none;
+  border-color: #d4af37;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+/* Redesigned buttons with premium styling and animations */
+button {
+  background: linear-gradient(135deg, #d4af37 0%, #f4e5a1 100%);
+  color: #000;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 54px;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+@media (max-width: 600px) {
+  .input-group button {
+    width: 100%;
+  }
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Redesigned customer cards with glassmorphism and animations */
+.customers-list {
+  display: grid;
+  gap: 20px;
+}
+
+.customer-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: clamp(20px, 3vw, 30px);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.customer-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.2);
+}
+
+.customer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.customer-info h3 {
+  color: #fff;
+  font-size: clamp(1.3em, 4vw, 1.6em);
+  margin-bottom: 8px;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.customer-info p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: clamp(0.9em, 3vw, 1em);
+  margin-bottom: 4px;
+}
+
+/* Redesigned visit tracker with premium styling */
+.visits-tracker {
+  display: flex;
+  gap: clamp(8px, 1.5vw, 12px);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.visit-circle {
+  width: clamp(45px, 8vw, 55px);
+  height: clamp(45px, 8vw, 55px);
+  border-radius: 50%;
+  border: 3px solid rgba(212, 175, 55, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: clamp(0.9em, 3vw, 1.1em);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.visit-circle.completed {
+  background: linear-gradient(135deg, #d4af37 0%, #f4e5a1 100%);
+  border-color: #d4af37;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  transform: scale(1.05);
+}
+
+.visit-circle.free {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  border-color: #10b981;
+  color: #fff;
+  animation: pulseGlow 2s infinite;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.8);
+  }
+}
+
+/* Redesigned action buttons with different styles */
+.customer-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-add-visit {
+  flex: 1;
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  color: #fff;
+  min-width: 150px;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+@media (max-width: 600px) {
+  .btn-add-visit {
+    min-width: 100%;
+  }
+
+  .customer-actions {
+    gap: 10px;
+  }
+
+  .btn-delete {
+    flex: 1;
+  }
+}
+
+.btn-add-visit:hover {
+  box-shadow: 0 6px 25px rgba(16, 185, 129, 0.5);
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+  color: #fff;
+  min-width: 54px;
+  padding: 16px;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.btn-delete:hover {
+  box-shadow: 0 6px 25px rgba(239, 68, 68, 0.5);
+}
+
+/* Redesigned free badge with glow effect */
+.free-badge {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: clamp(0.85em, 3vw, 1em);
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+  animation: badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 30px rgba(16, 185, 129, 0.7);
+  }
+}
+
+/* Redesigned empty state */
+.empty-state {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: clamp(50px, 10vw, 80px) 20px;
+  border-radius: 24px;
+  text-align: center;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.empty-state svg {
+  width: clamp(70px, 15vw, 100px);
+  height: clamp(70px, 15vw, 100px);
+  margin-bottom: 25px;
+  opacity: 0.3;
+  stroke: #d4af37;
+}
+
+.empty-state h3 {
+  font-size: clamp(1.3em, 4vw, 1.6em);
+  color: #d4af37;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.empty-state p {
+  font-size: clamp(1em, 3vw, 1.1em);
+  color: rgba(255, 255, 255, 0.5);
+}
